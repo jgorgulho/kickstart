@@ -1,4 +1,5 @@
 # kickstart
+# Disclaimer: Theese are *NOT* meant to be used for production !!!
 Kickstart files for GNU/Linux Fedora Distro Installs
 
 Short link for Main Kickstart file:
