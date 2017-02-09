@@ -6,4 +6,4 @@ https://git.io/vDmnh
 
 Files with "Virt" on title are mean for 20G virtual machines and need to be editted before use on bigger/smaller systems.
 
-Password for user and root is <toor>
+Password for user and root is toor.
