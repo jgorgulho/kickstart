@@ -49,6 +49,58 @@ logvol /home  --fstype="xfs" --size=10240 --label="home" --name=home --vgname=fe
 exec < /dev/tty3 > /dev/tty3
 chvt 3
 echo "################################"
+%pre
+exec < /dev/tty6 > /dev/tty6 2> /dev/tty6
+chvt 6
+echo "Starting of installation with kickstart v0.07 ..."
+chvt 1
+exec < /dev/tty1 > /dev/tty1 2> /dev/tty1
+%end
+# System authorization information
+auth --enableshadow --passalgo=sha512
+reboot
+# Use netwok installation
+#url --url="http://ftp.halifax.rwth-aachen.de/fedora/linux/releases/25/Everything/x86_64/os/"
+url --url="https://www.mirrorservice.org/sites/dl.fedoraproject.org/pub/fedora/linux/releases/25/Everything/x86_64/os/"
+# Use graphical install
+#graphical
+text
+# Run the Setup Agent on first boot
+firstboot --enable
+ignoredisk --only-use=sda
+# Keyboard layouts
+keyboard --vckeymap=pt --xlayouts='pt'
+# System language
+lang en_GB.UTF-8 --addsupport=de_DE.UTF-8,es_ES.UTF-8,fr_FR.UTF-8,pt_PT.UTF-8
+
+# Network information
+network  --bootproto=dhcp --device=ens3 --ipv6=auto --activate --hostname=fedora
+# Root password
+rootpw --iscrypted $6$atjCr0HoZu1xQJ2H$0ax1x7GXGG7alOKFN5uwEATd5gsa2.jiXmuvyfVXJs2eNYbf7/a9gBo4BlPCwCbLHL.CQs0m/Bx7sVGF0CBYQ.
+# System services
+services --enabled="chronyd"
+# System timezone
+timezone Europe/Berlin --isUtc
+user --groups=wheel --name=jgorgulho --password=$6$549pmB8XTodAr/zh$V4B1X5Ad6zUvFr462XTjR3AMBnOH1sVEUhekdsB0lRAyXuNW1nKavYSYxXABMYa.dvDiuW3I08r1a4Oftxip0. --iscrypted --gecos="José Gorgulho"
+# X Window System configuration information
+xconfig  --startxonboot
+# System bootloader configuration
+bootloader --location=mbr --boot-drive=sda
+# Partition clearing information
+clearpart --initlabel --drives=sda --all
+# Disk partitioning information
+part pv.589 --fstype="lvmpv" --ondisk=sda --size=19454
+part /boot --fstype="ext4" --ondisk=sda --size=1024 --label=boot
+volgroup fedora_fedora --pesize=4096 pv.589
+logvol /  --fstype="xfs" --size=7155 --label="root" --name=root --vgname=fedora_fedora
+logvol swap  --fstype="swap" --size=2048 --name=swap --vgname=fedora_fedora
+logvol /home  --fstype="xfs" --size=10240 --label="home" --name=home --vgname=fedora_fedora
+
+
+%post
+exec < /dev/tty3 > /dev/tty3
+chvt 3
+echo "################################"
 echo "# Running Post Configuration   #"
 echo "################################"
 echo 'Setting delta rpm...'
@@ -57,15 +109,23 @@ echo "Upgrading pip with... pip..."
 pip install --upgrade pip
 echo "Installing pytho powerline-status..."
 pip install powerline-status
-echo "Installing pytho powerline-status..."
+echo "Cloning dotfiles from github repo to root..."
+git clone https://github.com/jgorgulho/dotfiles /root/.dotfiles
+ln -sf /root/.dotfiles/.bashrc /root/.bashrc
+echo "Cloning dotfiles from github repo to user..."
 git clone https://github.com/jgorgulho/dotfiles /home/jgorgulho/.dotfiles
 ln -sf /home/jgorgulho/.dotfiles/.bashrc /home/jgorgulho/.bashrc
 chown -R jgorgulho /home/jgorgulho/.dotfiles
 chown -R jgorgulho /home/jgorgulho/.dotfiles/.*
 chown -R jgorgulho /home/jgorgulho/.bashrc
+echo "Installing Jekyll..."
+gem install jekyll
+echo "Enabling tuned..."
 systemctl enable tuned
+echo "Installing docker compose..."
 curl -L "https://github.com/docker/compose/releases/download/1.9.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 chmod +x /usr/local/bin/docker-compose
+echo "Installing docker compose bash completion..."
 curl -L https://raw.githubusercontent.com/docker/compose/$(docker-compose version --short)/contrib/completion/bash/docker-compose -o /etc/bash_completion.d/docker-compose
 chvt 1
 exec < /dev/tty1 > /dev/tty1 2> /dev/tty1
@@ -74,20 +134,19 @@ reboot
 %end
 
 %packages
-@^fedora-server-edition 
-@^administration-tools 
-@^authoring-and-publishing 
-@^books-and-guides 
-@^c-development-tools-and-libraries 
-@^container-management 
-@^development-tools 
-@^editors
-@^headless-management 
-@^system-tools 
-@^text-based-internet 
-@^printing 
-@^hardware-support 
-@^virtualization-headless
+@^server-product-environment                                                    
+@admin-tools                                                                    
+@authoring-and-publishing                                                       
+@c-development                                                                  
+@container-management                                                           
+@development-tools                                                              
+@editors                                                                        
+@hardware-support                                                               
+@headless-management                                                            
+@printing                                                                       
+@system-tools                                                                   
+@text-internet                                                                  
+@virtualization-headless                                                        
 tmux
 docker
 cockpit-docker
@@ -117,10 +176,6 @@ redhat-rpm-config
 chrony
 fortune-mod
 cowsay
-%end
-
-%addon com_redhat_kdump --disable --reserve-mb='128'
-
 %end
 
 %anaconda
