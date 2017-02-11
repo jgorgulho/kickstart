@@ -44,18 +44,6 @@ logvol /  --fstype="xfs" --size=7155 --label="root" --name=root --vgname=fedora_
 logvol swap  --fstype="swap" --size=2048 --name=swap --vgname=fedora_fedora
 logvol /home  --fstype="xfs" --size=10240 --label="home" --name=home --vgname=fedora_fedora
 
-
-%post
-exec < /dev/tty3 > /dev/tty3
-chvt 3
-echo "################################"
-%pre
-exec < /dev/tty6 > /dev/tty6 2> /dev/tty6
-chvt 6
-echo "Starting of installation with kickstart v0.07 ..."
-chvt 1
-exec < /dev/tty1 > /dev/tty1 2> /dev/tty1
-%end
 # System authorization information
 auth --enableshadow --passalgo=sha512
 reboot
