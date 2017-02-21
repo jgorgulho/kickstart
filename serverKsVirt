@@ -83,7 +83,7 @@ hplip hpijs nss-mdns fortune-mod cowsay powerline \
 tmux-powerline vim-plugin-powerline \
 dejavu-sans-mono-fonts google-droid-sans-mono-fonts \
 mozilla-fira-mono-fonts levien-inconsolata-fonts \
-firefox
+firefox ruby-devel rubygems-devel make
 
 echo 'Downloading hplip and lastpass for later install...'
 mkdir /home/jgorgulho/toInstall
