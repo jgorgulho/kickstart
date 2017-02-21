@@ -1,0 +1,18 @@
+dnf install -y tmux docker cockpit-docker \
+docker-vim vim vim-enhanced vim-common vim-filesystem \
+git python-pip perl-core spotify-client vlc \
+java-openjdk icedtea-web unzip chromium skype \
+flash-plugin libdvdcss deltarpm powertop skanlite \
+gimp inkscape setroubleshoot nmap ntfs-3g w3m \
+youtube-dl lynx cups cups-filters ghostscript \
+hplip hpijs nss-mdns fortune-mod cowsay powerline \
+tmux-powerline vim-plugin-powerline \
+dejavu-sans-mono-fonts google-droid-sans-mono-fonts \
+mozilla-fira-mono-fonts levien-inconsolata-fonts \
+firefox tuned ruby-devel libxml2-devel \
+rubygem-rails rubygem-sqlite3 rubygem-coffee-rails \
+rubygem-uglifier rubygem-jquery-rails \
+rubygem-turbolinks rubygem-jbuilder \
+rubygem-sdoc rubygem-spring rubygem-byebug \
+rubygem-web-console nodejs npm libffi \
+redhat-rpm-config chrony

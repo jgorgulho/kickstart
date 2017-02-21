@@ -1,0 +1,12 @@
+tmux \
+docker-vim vim-enhanced vim-common vim-filesystem \
+git python-pip perl-core spotify-client vlc \
+java-openjdk icedtea-web unzip chromium skype \
+flash-plugin libdvdcss deltarpm powertop skanlite \
+gimp inkscape setroubleshoot nmap ntfs-3g w3m \
+youtube-dl lynx cups cups-filters ghostscript \
+hplip hpijs nss-mdns fortune-mod cowsay powerline \
+tmux-powerline vim-plugin-powerline \
+dejavu-sans-mono-fonts google-droid-sans-mono-fonts \
+mozilla-fira-mono-fonts levien-inconsolata-fonts \
+firefox
