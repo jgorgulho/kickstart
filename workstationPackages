@@ -42,12 +42,49 @@ vim-plugin-powerline
 vlc
 w3m
 youtube-dl
-   Authoring and Publishing
-   Administration Tools
-   C Development Tools and Libraries
-Development Tools
-   Container Management
-   Editors
-   Headless Management
-   System Tools
-   Text-based Internet
+abrt-desktop
+recordmydesktop
+system-config-date
+system-config-keyboard
+system-config-language
+system-config-users
+cmake
+autoconf
+automake
+binutils
+bison
+flex
+gcc
+gcc-c++
+gdb
+glibc-devel
+libtool
+make
+pkgconfig
+strace
+docker
+docker-cockpit
+docker-registry
+fedora-dockerfiles
+gettext
+diffstat
+doxygen
+git
+patch
+patchutils
+subversion
+systemtap
+vim-X11
+vim-enhanced
+PackageKit
+cockpit-bridge
+cockpit-networkmanager
+cockpit-shell
+cockpit-storaged
+cockpit-ws
+openssh-server
+rolekit
+cockpit-kubernetes
+cockpit-pcp
+w3m
+lynx
