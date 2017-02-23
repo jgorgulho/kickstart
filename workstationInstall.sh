@@ -36,7 +36,7 @@ echo "###############################################"
 #echo 'Installing big list of packages...'
 sudo dnf install - y abrt-desktop autoconf automake binutils bison chromium \
 chrony cmake cowsay cups cups-filters dejavu-sans-mono-fonts deltarpm \
-diffstat docker docker-cockpit docker-registry docker-vim doxygen \
+diffstat docker docker-registry docker-vim doxygen \
 fedora-dockerfiles firefox flash-plugin flex fortune-mod gcc gcc-c++ \
 gdb gettext ghostscript gimp git glibc-devel google-droid-sans-mono-fonts \
 guestfs-browser hpijs hplip icedtea-web inkscape java-openjdk \
