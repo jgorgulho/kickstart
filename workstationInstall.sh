@@ -34,7 +34,7 @@ echo "###############################################"
 #sudo dnf update -y
 #
 #echo 'Installing big list of packages...'
-sudo dnf install - y abrt-desktop autoconf automake binutils bison chromium \
+sudo dnf install -y abrt-desktop autoconf automake binutils bison chromium \
 chrony cmake cowsay cups cups-filters dejavu-sans-mono-fonts deltarpm \
 diffstat docker docker-registry docker-vim doxygen \
 fedora-dockerfiles firefox flash-plugin flex fortune-mod gcc gcc-c++ \
