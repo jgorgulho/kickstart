@@ -36,7 +36,7 @@ python-libguestfs python-pip qemu-kvm redhat-rpm-config rolekit ruby-devel \
 rubygem-byebug rubygem-coffee-rails rubygem-jbuilder rubygem-jquery-rails \
 rubygem-rails rubygem-sdoc rubygem-spring rubygem-sqlite3 rubygem-turbolinks \
 rubygem-uglifier rubygem-web-console setroubleshoot strace subversion \
-system-config-date system-config-keyboard system-config-language \
+system-config-keyboard system-config-language \
 system-config-users systemtap tmux tmux-powerline tuned unzip vim vim-common \
 vim-enhanced vim-filesystem vim-plugin-powerline virt-install virt-manager \
 virt-top virt-viewer w3m youtube-dl
