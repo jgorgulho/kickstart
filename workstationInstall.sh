@@ -48,8 +48,8 @@ powerline powertop python-libguestfs python-pip qemu-kvm recordmydesktop \
 redhat-rpm-config rolekit setroubleshoot skanlite skype spotify-client \
 strace subversion system-config-keyboard \
 system-config-language system-config-users systemtap tmux \
-tmux-powerline tuned unzip vim vim-common vim-enhanced vim-filesystem \
-vim-plugin-powerline vim-X11 virt-install virt-manager virt-top virt-viewer \
+tuned unzip vim vim-common vim-enhanced vim-filesystem \
+*powerline* vim-X11 virt-install virt-manager virt-top virt-viewer \
 vlc youtube-dl 
 
 echo 'Downloading hplip and lastpass for later install...'
