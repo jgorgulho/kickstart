@@ -54,7 +54,7 @@ vlc youtube-dl xmonad ghc-xmonad-contrib-devel xmobar
 
 echo "Fixing and setting KWin as Plasma Windows Manager after instaling XMonad..."
 mdkir -p ~/.config/plasma-workspace/env
-echo "export KDEWM=$(which kwin)" > set_window_manager.sh
+echo "export KDEWM=$(which kwin)" > ~/.config/plasma-workspace/env/set_window_manager.sh
   
 echo 'Downloading hplip and lastpass for later install...'
 mkdir /home/jgorgulho/toInstall
