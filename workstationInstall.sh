@@ -52,6 +52,10 @@ tuned unzip vim vim-common vim-enhanced vim-filesystem \
 *powerline* vim-X11 virt-install virt-manager virt-top virt-viewer \
 vlc youtube-dl xmonad ghc-xmonad-contrib-devel xmobar
 
+echo "Fixing and setting KWin as Plasma Windows Manager after instaling XMonad..."
+mdkir -p ~/.config/plasma-workspace/env
+echo "export KDEWM=$(which kwin)" > set_window_manager.sh
+  
 echo 'Downloading hplip and lastpass for later install...'
 mkdir /home/jgorgulho/toInstall
 wget -O hplip.run "http://downloads.sourceforge.net/project/hplip/hplip/3.16.11/hplip-3.16.11.run?r=http%3A%2F%2Fhplipopensource.com%2Fhplip-web%2Finstall%2Finstall%2Findex.html&ts=1480467242&use_mirror=netassist"
