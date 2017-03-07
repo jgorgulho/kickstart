@@ -53,7 +53,7 @@ tuned unzip vim vim-common vim-enhanced vim-filesystem \
 vlc youtube-dl xmonad ghc-xmonad-contrib-devel xmobar
 
 echo "Fixing and setting KWin as Plasma Windows Manager after instaling XMonad..."
-mdkir -p ~/.config/plasma-workspace/env
+mkdir -p ~/.config/plasma-workspace/env
 echo "export KDEWM=$(which kwin)" > ~/.config/plasma-workspace/env/set_window_manager.sh
 chmod +x ~/.config/plasma-workspace/env/set_window_manager.sh
 
