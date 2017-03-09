@@ -50,12 +50,7 @@ strace subversion system-config-keyboard \
 system-config-language system-config-users systemtap tmux \
 tuned unzip vim vim-common vim-enhanced vim-filesystem \
 *powerline* vim-X11 virt-install virt-manager virt-top virt-viewer \
-vlc youtube-dl xmonad ghc-xmonad-contrib-devel xmobar
-
-echo "Fixing and setting KWin as Plasma Windows Manager after instaling XMonad..."
-mkdir -p ~/.config/plasma-workspace/env
-echo "export KDEWM=$(which kwin)" > ~/.config/plasma-workspace/env/set_window_manager.sh
-chmod +x ~/.config/plasma-workspace/env/set_window_manager.sh
+vlc youtube-dl 
 
 echo 'Downloading hplip and lastpass for later install...'
 mkdir /home/jgorgulho/toInstall
