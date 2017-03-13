@@ -39,7 +39,7 @@ rubygem-uglifier rubygem-web-console setroubleshoot strace subversion \
 system-config-keyboard system-config-language \
 system-config-users systemtap tmux tuned unzip vim vim-common \
 vim-enhanced vim-filesystem *powerline* virt-install virt-manager \
-virt-top virt-viewer w3m youtube-dl
+virt-top virt-viewer w3m youtube-dl fuse-sshfs
 
 echo 'Downloading hplip and lastpass for later install...'
 mkdir /home/jgorgulho/toInstall
