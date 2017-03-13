@@ -50,7 +50,7 @@ strace subversion system-config-keyboard \
 system-config-language system-config-users systemtap tmux \
 tuned unzip vim vim-common vim-enhanced vim-filesystem \
 *powerline* vim-X11 virt-install virt-manager virt-top virt-viewer \
-vlc youtube-dl 
+vlc youtube-dl fuse-sshfs
 
 echo 'Downloading hplip and lastpass for later install...'
 mkdir /home/jgorgulho/toInstall
