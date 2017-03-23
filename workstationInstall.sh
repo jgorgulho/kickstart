@@ -75,9 +75,6 @@ chown -R jgorgulho /home/jgorgulho/.bashrc
 echo "Installing Jekyll..."
 gem install jekyll
 
-echo "Installing docker compose bash completion..."
-curl -L https://raw.githubusercontent.com/docker/compose/$(docker-compose version --short)/contrib/completion/bash/docker-compose -o /etc/bash_completion.d/docker-compose
-
 echo "Enabling tuned..."
 systemctl enable tuned
 echo "Enabling powertop..."
