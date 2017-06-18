@@ -28,7 +28,7 @@ diffstat docker docker-registry docker-vim doxygen \
 fedora-dockerfiles firefox flex fortune-mod gcc gcc-c++ \
 gdb gettext ghostscript gimp git glibc-devel google-droid-sans-mono-fonts \
 guestfs-browser hpijs hplip icedtea-web inkscape java-openjdk \
-levien-inconsolata-fonts libdvdcss libffi libguestfs-tools libtool \
+levien-inconsolata-fonts libffi libguestfs-tools libtool \
 libvirt-daemon-config-network libvirt-daemon-kvm libxml2-devel lynx \
 make mozilla-fira-mono-fonts nmap nodejs npm nss-mdns ntfs-3g \
 openssh-server PackageKit patch patchutils perl-core pkgconfig \
