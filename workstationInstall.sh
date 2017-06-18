@@ -11,18 +11,6 @@ echo 'Updating system...'
 sudo dnf update -y
 
 echo 'Setting repositories...'
-echo 'Setting Spotify repository...'
-#Spotify
-sudo dnf config-manager --add-repo=http://negativo17.org/repos/fedora-spotify.repo
-echo 'Setting Skype repository...'
-# Skype
-sudo dnf config-manager --add-repo=http://negativo17.org/repos/fedora-skype.repo
-echo 'Setting Flash repository...'
-# Flash
-dnf config-manager --add-repo=http://negativo17.org/repos/fedora-flash-plugin.repo
-echo 'Setting general multimedia repository...'
-# Multimedia
-sudo dnf config-manager --add-repo=http://negativo17.org/repos/fedora-multimedia.repo
 
 echo 'Installing rpmfusion...'
 sudo dnf install -y "https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm"
@@ -37,7 +25,7 @@ echo 'Installing big list of packages...'
 sudo dnf install -y abrt-desktop autoconf automake binutils bison chromium \
 chrony cmake cowsay cups cups-filters dejavu-sans-mono-fonts deltarpm \
 diffstat docker docker-registry docker-vim doxygen \
-fedora-dockerfiles firefox flash-plugin flex fortune-mod gcc gcc-c++ \
+fedora-dockerfiles firefox flex fortune-mod gcc gcc-c++ \
 gdb gettext ghostscript gimp git glibc-devel google-droid-sans-mono-fonts \
 guestfs-browser hpijs hplip icedtea-web inkscape java-openjdk \
 levien-inconsolata-fonts libdvdcss libffi libguestfs-tools libtool \
@@ -45,7 +33,7 @@ libvirt-daemon-config-network libvirt-daemon-kvm libxml2-devel lynx \
 make mozilla-fira-mono-fonts nmap nodejs npm nss-mdns ntfs-3g \
 openssh-server PackageKit patch patchutils perl-core pkgconfig \
 powerline powertop python-libguestfs python-pip qemu-kvm recordmydesktop \
-redhat-rpm-config rolekit setroubleshoot skanlite skype spotify-client \
+redhat-rpm-config rolekit ruby-devel setroubleshoot skanlite \
 strace subversion system-config-keyboard \
 system-config-language system-config-users systemtap tmux \
 tuned unzip vim vim-common vim-enhanced vim-filesystem \
