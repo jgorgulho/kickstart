@@ -26,7 +26,14 @@ DNF_DELTARPM_CONFIG_STRING = "deltarpm=1"
 OS_UPDATE_SYSTEM = "sudo dnf update"
 SUDO_GET_PASSWORD = "sudo touch /tmp/tempFileForInstallationScript"
 SUDO_FORGET_PASSWORD = "sudo -k"
-
+INSTALL_PACKAGE_CMD = "sudo dnf install -y "
+FEDORA_VERSION_NUMBER = subprocess.check_output(['rpm','-E %fedora'])
+RPM_FUSION_FREE_DOWNLOAD_URL = "\"https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-"+FEDORA_VERSION_NUMBER.strip()+".noarch.rpm\""
+RPM_FUSION_NONFREE_DOWNLOAD_URL = "\"https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-"+FEDORA_VERSION_NUMBER.strip()+".noarch.rpm\""
+ATOM_EDITOR_DOWNLOAD_URL = "https://atom.io/download/rpm"
+PACKAGES_FILE = "workstationPackagesToInstall.txt"
+PACKAGE_TO_INSTALL_LIST = ""
+ERROR_OPENING_PACKAGES_FILE = "\n\nPlease make sure that the file " + PACKAGES_FILE + " exists.\n\n"
 #
 #    Functions
 #
@@ -52,51 +59,65 @@ def performUpdate():
 
 def performInstallFirstStage():
     setDeltaRpm() 
-    performUpdate()
 
-def performInstall():
-    performInstallFirstStage()   
+def installPackage(localPackageToInstall):
+    commandToRun = INSTALL_PACKAGE_CMD + localPackageToInstall
+    subprocess.call(shlex.split(commandToRun))
 
-#
-    #echo 'Setting repositories...'
-    #
-    #echo 'Installing rpmfusion...'
-    #sudo dnf install -y "https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm"
-    #sudo dnf install -y "https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm"
+def installRpmFusion():
+    print("\nInstalling rpmfusion...\n")
+    installPackage(RPM_FUSION_FREE_DOWNLOAD_URL)
+    installPackage(RPM_FUSION_NONFREE_DOWNLOAD_URL)
+    print("\nInstaled rpmfusion.\n")
     #echo 'Installing GitHub Atom editor...'
     #sudo dnf install -y "https://github.com/atom/atom/releases/download/v1.11.1/atom.x86_64.rpm"
-    #
-    #echo 'Updating system...'
-    #sudo dnf update -y
-    #
-    #echo 'Installing big list of packages...'
-    #sudo dnf install -y abrt-desktop autoconf automake binutils bison chromium \
-    #chrony cmake cowsay cups cups-filters dejavu-sans-mono-fonts deltarpm \
-    #diffstat docker docker-registry docker-vim doxygen \
-    #fedora-dockerfiles firefox flex fortune-mod gcc gcc-c++ \
-    #gdb gettext ghostscript gimp git glibc-devel google-droid-sans-mono-fonts \
-    #guestfs-browser hpijs hplip icedtea-web inkscape java-openjdk \
-    #levien-inconsolata-fonts libffi libguestfs-tools libtool \
-    #libvirt-daemon-config-network libvirt-daemon-kvm libxml2-devel lynx \
-    #make mozilla-fira-mono-fonts nmap nodejs npm nss-mdns ntfs-3g \
-    #openssh-server PackageKit patch patchutils perl-core pkgconfig \
-    #powerline powertop python-libguestfs python-pip qemu-kvm recordmydesktop \
-    #redhat-rpm-config rolekit ruby-devel setroubleshoot skanlite \
-    #strace subversion system-config-keyboard \
-    #system-config-language system-config-users systemtap tmux \
-    #tuned unzip vim vim-common vim-enhanced vim-filesystem \
-    #*powerline* vim-X11 virt-install virt-manager virt-top virt-viewer \
-    #vlc youtube-dl fuse-sshfs
-    #
+
+def installAtomEditor():
+    print("\nInstalling Atom editor...\n")
+    installPackage(ATOM_EDITOR_DOWNLOAD_URL)
+    print("\nInstaled Atom editor.\n")
+    #echo 'Installing GitHub Atom editor...'
+    #sudo dnf install -y "https://github.com/atom/atom/releases/download/v1.11.1/atom.x86_64.rpm"
+
+def getListOfPackagesToInstall():
+    print("Getting list of packages to install from " + PACKAGES_FILE + " ...")
+    try:
+        PACKAGE_TO_INSTALL_LIST = subprocess.check_output(['cat',PACKAGES_FILE])
+    except:
+        print(ERROR_OPENING_PACKAGES_FILE)
+        makeSudoForgetPass()
+        printEndString()
+        exit()
+    print("Finished getting package list."
+
+def installPackagesFromFile():
+    print("Installing packages from list...")
+    installPackage(PACKAGE_TO_INSTALL_LIST)
+    print("Finished installing package list."
+
+def performInstallThirdStage():
+    getListOfPackagesToInstall()
+
+def performInstallSecondtStage():
+    installRpmFusion()
+    
+def performInstall():
+    performInstallFirstStage()   
+    performUpdate()
+    performInstallSecondtStage()
+    performUpdate()
+    performInstallThirdStage()
+
     ## Main Gnome Shell Extensions
     #echo 'Installing Gnome Shell Extensions'
-    #sudo dnf install -y gnome-shell-extension-window-list \
-    #    gnome-shell-extension-openweather \
-    #    gnome-shell-extension-alternate-tab \
-    #    gnome-shell-extension-background-logo \
-    #    gnome-shell-extension-launch-new-instance \
-    #    gnome-shell-extension-no-topleft-hot-corner \
-    #    gnome-shell-extension-media-player-indicator
+    #sudo dnf install -y 
+    gnome-shell-extension-window-list \
+    gnome-shell-extension-openweather \
+    gnome-shell-extension-alternate-tab \
+    gnome-shell-extension-background-logo \
+    gnome-shell-extension-launch-new-instance \
+    gnome-shell-extension-no-topleft-hot-corner \
+    gnome-shell-extension-media-player-indicator
     #
     ## Caffeine Gnome Shell Extension
     #echo 'Installing Caffeine Gnome Shell Extensions'
@@ -165,6 +186,8 @@ def main():
             getSudoPass()
         except:
             printNeedRootRightsString()
+            makeSudoForgetPass()
+            printEndString()
             exit()
         performInstall()
     makeSudoForgetPass()
