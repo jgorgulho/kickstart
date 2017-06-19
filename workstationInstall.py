@@ -15,7 +15,7 @@ WELCOME_STRING = """
 # Running Installation Script for Workstation          #
 ########################################################\n\n\n
 """
-RAN_SCRIP_STRING = """\n\n\n
+RAN_SCRIP_STRING = """\n
 ########################################################
 # Finished running Installation Script for Workstation #
 ########################################################
@@ -36,22 +36,28 @@ def setDeltaRpm():
     dnfConfFile = fobj.read().strip().split()
     stringToSearch = DNF_DELTARPM_CONFIG_STRING 
     if stringToSearch in dnfConfFile:
-        print("Delta rpm already configured\n")
+        print("Delta rpm already configured.\n")
         pass
     else: 
     	print('Setting delta rpm...\n')
         fobj.close()
         commandToRun = "sudo sh -c 'echo " + DNF_DELTARPM_CONFIG_STRING + " >> " + DNF_CONST_FILE +"'"
 	subprocess.call(shlex.split(commandToRun))
-    	print('Delta rpm set...\n')
+    	print('Delta rpm set.\n')
 
-def performInstall():
+def performUpdate():
     print("\nUpdating system...\n")
     subprocess.call(shlex.split(OS_UPDATE_SYSTEM))
+    print("\nUpdated system.\n")
+
+def performInstallFirstStage():
+    setDeltaRpm() 
+    performUpdate()
 
 def performInstall():
-    setDeltaRpm() 
-    #
+    performInstallFirstStage()   
+
+#
     #echo 'Setting repositories...'
     #
     #echo 'Installing rpmfusion...'
@@ -149,7 +155,6 @@ def getSudoPass():
 
 def makeSudoForgetPass():
     subprocess.call(shlex.split(SUDO_FORGET_PASSWORD))
- 
 
 def main():    
     printWelcomeString()
