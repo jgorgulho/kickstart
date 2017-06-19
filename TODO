@@ -1,0 +1,8 @@
+Change script to use python instead
+Áctivate extensions from command line
+    search:
+         ~/.local/share/gnome-shell/extensions
+	 /usr/share/gnome-shell/extensions
+    Get string per line until @
+    Use gnome-shell-extension-tool -e <extenson-name>
+Check version to get right version of rpm fusion
