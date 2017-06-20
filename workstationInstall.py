@@ -23,20 +23,32 @@ RAN_SCRIP_STRING = """\n
 RUN_SCRIPT_AS_ROOT_STRING = "\n\nPlease run this script as root or equivalent.\n\n"
 DNF_CONST_FILE = "/etc/dnf/dnf.conf"
 DNF_DELTARPM_CONFIG_STRING = "deltarpm=1"
-OS_UPDATE_SYSTEM = "sudo dnf update"
+OS_UPDATE_SYSTEM = "sudo dnf update -y"
 SUDO_GET_PASSWORD = "sudo touch /tmp/tempFileForInstallationScript"
 SUDO_FORGET_PASSWORD = "sudo -k"
+SUDO_FORGET_PASSWORD_STRING = "\n\nForgetting sudo password.\n\n"
 INSTALL_PACKAGE_CMD = "sudo dnf install -y "
 FEDORA_VERSION_NUMBER = subprocess.check_output(['rpm','-E %fedora'])
 RPM_FUSION_FREE_DOWNLOAD_URL = "\"https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-"+FEDORA_VERSION_NUMBER.strip()+".noarch.rpm\""
 RPM_FUSION_NONFREE_DOWNLOAD_URL = "\"https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-"+FEDORA_VERSION_NUMBER.strip()+".noarch.rpm\""
 ATOM_EDITOR_DOWNLOAD_URL = "https://atom.io/download/rpm"
 PACKAGES_FILE = "workstationPackagesToInstall.txt"
-PACKAGE_TO_INSTALL_LIST = ""
+PACKAGE_TO_INSTALL_LIST = " "
 ERROR_OPENING_PACKAGES_FILE = "\n\nPlease make sure that the file " + PACKAGES_FILE + " exists.\n\n"
+ERROR_RUNNING_COMMAND = "\n\n Error running the command: "
+
 #
 #    Functions
 #
+
+def commandNotRanSuccessfully( commandRan):
+    print(ERROR_RUNNING_COMMAN + commandRan +" \n\n\n")
+
+def exitScript(forgetPass):
+    if(forgetPass == 0):
+        makeSudoForgetPass()
+    printEndString()
+    exit()
 
 def setDeltaRpm():
     fobj = open(DNF_CONST_FILE)
@@ -44,7 +56,6 @@ def setDeltaRpm():
     stringToSearch = DNF_DELTARPM_CONFIG_STRING 
     if stringToSearch in dnfConfFile:
         print("Delta rpm already configured.\n")
-        pass
     else: 
     	print('Setting delta rpm...\n')
         fobj.close()
@@ -54,7 +65,11 @@ def setDeltaRpm():
 
 def performUpdate():
     print("\nUpdating system...\n")
-    subprocess.call(shlex.split(OS_UPDATE_SYSTEM))
+    try:
+        subprocess.call(shlex.split(OS_UPDATE_SYSTEM))
+    except:
+        commandNotRanSuccessfully(OS_UPDATE_SYSTEM)
+        exitScript()
     print("\nUpdated system.\n")
 
 def performInstallFirstStage():
@@ -69,34 +84,46 @@ def installRpmFusion():
     installPackage(RPM_FUSION_FREE_DOWNLOAD_URL)
     installPackage(RPM_FUSION_NONFREE_DOWNLOAD_URL)
     print("\nInstaled rpmfusion.\n")
-    #echo 'Installing GitHub Atom editor...'
-    #sudo dnf install -y "https://github.com/atom/atom/releases/download/v1.11.1/atom.x86_64.rpm"
 
 def installAtomEditor():
     print("\nInstalling Atom editor...\n")
     installPackage(ATOM_EDITOR_DOWNLOAD_URL)
     print("\nInstaled Atom editor.\n")
-    #echo 'Installing GitHub Atom editor...'
-    #sudo dnf install -y "https://github.com/atom/atom/releases/download/v1.11.1/atom.x86_64.rpm"
 
 def getListOfPackagesToInstall():
     print("Getting list of packages to install from " + PACKAGES_FILE + " ...")
+    global PACKAGE_TO_INSTALL_LIST 
     try:
         PACKAGE_TO_INSTALL_LIST = subprocess.check_output(['cat',PACKAGES_FILE])
     except:
         print(ERROR_OPENING_PACKAGES_FILE)
-        makeSudoForgetPass()
-        printEndString()
-        exit()
-    print("Finished getting package list."
+        exitScript()
+    print("Finished getting package list.")
 
 def installPackagesFromFile():
     print("Installing packages from list...")
     installPackage(PACKAGE_TO_INSTALL_LIST)
-    print("Finished installing package list."
+    print("Finished installing package list.")
+
+def installCaffeineGnomeExtention():
+    # Caffeine Gnome Shell Extension
+    print("Installing Caffeine Gnome Shell Extensions...")
+    commandToRun = """
+    git clone git://github.com/eonpatapon/gnome-shell-extension-caffeine.git &&     cd gnome-shell-extension-caffeine && sudo ./update-locale.sh && sudo glib-compile-schemas --strict --targetdir=caffeine@patapon.info/schemas/ caffeine@patapon.info/schemas && cp -r caffeine@patapon.info ~/.local/share/gnome-shell/extensions && cd $HOME && rm -Rf gnome-shell-extension-caffeine """
+    try:
+        subprocess.call(shlex.split(commandToRun))
+    except:
+        commandNotRanSuccessfully(commandToRun)
+        exitScript()
+    print("Instaled Caffeine Gnome Shell Extensions.")
+
+def performInstallFourthStage():
+    installCaffeineGnomeExtention()
 
 def performInstallThirdStage():
     getListOfPackagesToInstall()
+    print("\n\nPackages to install2 " + PACKAGE_TO_INSTALL_LIST + " .\n\n")
+    installPackagesFromFile()
 
 def performInstallSecondtStage():
     installRpmFusion()
@@ -107,28 +134,9 @@ def performInstall():
     performInstallSecondtStage()
     performUpdate()
     performInstallThirdStage()
+    #performInstallFourthStage()
 
-    ## Main Gnome Shell Extensions
-    #echo 'Installing Gnome Shell Extensions'
-    #sudo dnf install -y 
-    gnome-shell-extension-window-list \
-    gnome-shell-extension-openweather \
-    gnome-shell-extension-alternate-tab \
-    gnome-shell-extension-background-logo \
-    gnome-shell-extension-launch-new-instance \
-    gnome-shell-extension-no-topleft-hot-corner \
-    gnome-shell-extension-media-player-indicator
     #
-    ## Caffeine Gnome Shell Extension
-    #echo 'Installing Caffeine Gnome Shell Extensions'
-    #cd $HOME
-    #git clone git://github.com/eonpatapon/gnome-shell-extension-caffeine.git
-    #cd gnome-shell-extension-caffeine
-    #sudo ./update-locale.sh
-    #sudo glib-compile-schemas --strict --targetdir=caffeine@patapon.info/schemas/ caffeine@patapon.info/schemas
-    #cp -r caffeine@patapon.info ~/.local/share/gnome-shell/extensions
-    #cd $HOME
-    #rm -Rf gnome-shell-extension-caffeine
     #
     #
     #echo 'Downloading hplip and lastpass for later install...'
@@ -175,6 +183,7 @@ def getSudoPass():
     subprocess.call(shlex.split(SUDO_GET_PASSWORD))
 
 def makeSudoForgetPass():
+    print(SUDO_FORGET_PASSWORD_STRING)
     subprocess.call(shlex.split(SUDO_FORGET_PASSWORD))
 
 def main():    
@@ -186,12 +195,9 @@ def main():
             getSudoPass()
         except:
             printNeedRootRightsString()
-            makeSudoForgetPass()
-            printEndString()
-            exit()
+            exitScript()
         performInstall()
-    makeSudoForgetPass()
-    printEndString()
+    exitScript(1)
 
 #
 # Run Main Script
