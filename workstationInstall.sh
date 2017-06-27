@@ -50,16 +50,6 @@ sudo dnf install -y gnome-shell-extension-window-list \
     gnome-shell-extension-no-topleft-hot-corner \
     gnome-shell-extension-media-player-indicator
 
-# Caffeine Gnome Shell Extension
-echo 'Installing Caffeine Gnome Shell Extensions'
-cd $HOME
-git clone git://github.com/eonpatapon/gnome-shell-extension-caffeine.git
-cd gnome-shell-extension-caffeine
-sudo ./update-locale.sh
-sudo glib-compile-schemas --strict --targetdir=caffeine@patapon.info/schemas/ caffeine@patapon.info/schemas
-cp -r caffeine@patapon.info ~/.local/share/gnome-shell/extensions
-cd $HOME
-rm -Rf gnome-shell-extension-caffeine
 gnome-shell-extension-tool -e alternate-tab 
 gnome-shell-extension-tool -e background-logo 
 gnome-shell-extension-tool -e launch-new-instance 
