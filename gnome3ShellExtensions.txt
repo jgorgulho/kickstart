@@ -8,3 +8,4 @@ https://extensions.gnome.org/extension/750/openweather/
 https://extensions.gnome.org/extension/826/suspend-button/
 https://extensions.gnome.org/extension/570/todotxt/
 https://extensions.gnome.org/extension/427/workspaces-to-dock/
+https://extensions.gnome.org/extension/517/caffeine/
