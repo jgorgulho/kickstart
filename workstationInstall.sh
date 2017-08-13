@@ -22,6 +22,7 @@ echo 'Updating system...'
 sudo dnf update -y
 
 echo 'Installing big list of packages...'
+sudo dnf group install "C Development Tools and Libraries"
 sudo dnf install -y abrt-desktop autoconf automake binutils bison chromium \
 chrony cmake cowsay cups cups-filters dejavu-sans-mono-fonts deltarpm \
 diffstat docker docker-registry docker-vim doxygen \
