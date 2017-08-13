@@ -22,7 +22,7 @@ echo 'Updating system...'
 sudo dnf update -y
 
 echo 'Installing big list of packages...'
-sudo dnf group install "C Development Tools and Libraries"
+sudo dnf group install -y "C Development Tools and Libraries"
 sudo dnf install -y abrt-desktop autoconf automake binutils bison chromium \
 chrony cmake cowsay cups cups-filters dejavu-sans-mono-fonts deltarpm \
 diffstat docker docker-registry docker-vim doxygen \
@@ -60,30 +60,8 @@ gnome-shell-extension-tool -e window-list
 sudo dnf copr enable -y region51/chrome-gnome-shell
 sudo dnf install -y chrome-gnome-shell
 
-
-#
-# TODO
-#
-#for file in /usr/share/gnome-shell/extensions/*; do 
-#	echo "$file" | 
-#	sed 's/\/usr\/share\/gnome-shell\/extensions\///g' | 
-#	sed 's/\.gcampax.github.com//g'|
-#	sed 's/@fedorahosted.org//'; 
-#done
-
 echo "[Settings]\ngtk-aplication-prefer-dark-theme=1" \
     > ~/.configs/gtk-3.0/settings.ini
-
-
-echo 'Downloading hplip and lastpass for later install...'
-mkdir /home/jgorgulho/toInstall
-wget -O hplip.run "http://downloads.sourceforge.net/project/hplip/hplip/3.16.11/hplip-3.16.11.run?r=http%3A%2F%2Fhplipopensource.com%2Fhplip-web%2Finstall%2Finstall%2Findex.html&ts=1480467242&use_mirror=netassist"
-wget -O lastpass.tar.bz2 "https://lastpass.com/lplinux.tar.bz2"
-echo 'Moving hplip and lastpass to user folder...'
-mv hplip.run /home/jgorgulho/toInstall
-mv lastpass.tar.bz2 /home/jgorgulho/toInstall
-chown -R jgorgulho /home/jgorgulho/toInstall
-chown -R jgorgulho /home/jgorgulho/toInstall/*
 
 echo "Cloning dotfiles from github repo to root..."
 git clone https://github.com/jgorgulho/dotfiles /root/.dotfiles
@@ -99,3 +77,5 @@ echo "Enabling tuned..."
 systemctl enable tuned
 echo "Enabling powertop..."
 systemctl enable powertop
+systemctl enable sshd
+systemctl enable cockpit
