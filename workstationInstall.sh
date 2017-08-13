@@ -33,7 +33,7 @@ libvirt-daemon-config-network libvirt-daemon-kvm libxml2-devel lynx \
 make mozilla-fira-mono-fonts nmap nodejs npm nss-mdns ntfs-3g \
 openssh-server PackageKit patch patchutils perl-core pkgconfig \
 powerline powertop python-libguestfs python-pip qemu-kvm recordmydesktop \
-redhat-rpm-config rolekit ruby-devel setroubleshoot skanlite \
+redhat-rpm-config rolekit ruby-devel rubygems-devel setroubleshoot skanlite \
 strace subversion system-config-keyboard \
 system-config-language system-config-users systemtap tmux \
 tuned unzip vim vim-common vim-enhanced vim-filesystem \
@@ -95,7 +95,7 @@ chown -R jgorgulho /home/jgorgulho/.dotfiles/.*
 chown -R jgorgulho /home/jgorgulho/.bashrc
 
 echo "Installing Jekyll..."
-gem install jekyll
+gem install jekyll bundler
 
 echo "Enabling tuned..."
 systemctl enable tuned
