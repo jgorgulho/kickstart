@@ -95,9 +95,6 @@ chown -R jgorgulho /home/jgorgulho/.dotfiles
 chown -R jgorgulho /home/jgorgulho/.dotfiles/.*
 chown -R jgorgulho /home/jgorgulho/.bashrc
 
-echo "Installing Jekyll..."
-gem install jekyll bundler
-
 echo "Enabling tuned..."
 systemctl enable tuned
 echo "Enabling powertop..."
