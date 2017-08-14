@@ -75,8 +75,8 @@ chown -R jgorgulho /home/jgorgulho/.dotfiles/.*
 chown -R jgorgulho /home/jgorgulho/.bashrc
 
 echo "Enabling tuned..."
-systemctl enable tuned
+sudo systemctl enable tuned
 echo "Enabling powertop..."
-systemctl enable powertop
-systemctl enable sshd
-systemctl enable cockpit.socket
+sudo systemctl enable powertop
+sudo systemctl enable sshd
+sudo systemctl enable cockpit.socket
