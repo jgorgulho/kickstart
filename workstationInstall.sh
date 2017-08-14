@@ -41,25 +41,6 @@ tuned unzip vim vim-common vim-enhanced vim-filesystem \
 *powerline* vim-X11 virt-install virt-manager virt-top virt-viewer \
 vlc youtube-dl fuse-sshfs
 
-# Main Gnome Shell Extensions
-echo 'Installing Gnome Shell Extensions'
-sudo dnf install -y gnome-shell-extension-window-list \
-    gnome-shell-extension-openweather \
-    gnome-shell-extension-alternate-tab \
-    gnome-shell-extension-background-logo \
-    gnome-shell-extension-launch-new-instance \
-    gnome-shell-extension-no-topleft-hot-corner \
-    gnome-shell-extension-media-player-indicator
-
-gnome-shell-extension-tool -e alternate-tab 
-gnome-shell-extension-tool -e background-logo 
-gnome-shell-extension-tool -e launch-new-instance 
-gnome-shell-extension-tool -e places-menu
-gnome-shell-extension-tool -e user-theme 
-gnome-shell-extension-tool -e window-list 
-sudo dnf copr enable -y region51/chrome-gnome-shell
-sudo dnf install -y chrome-gnome-shell
-
 echo "Cloning dotfiles from github repo to root..."
 git clone https://github.com/jgorgulho/dotfiles /root/.dotfiles
 ln -sf /root/.dotfiles/.bashrc /root/.bashrc
