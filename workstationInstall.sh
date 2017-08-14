@@ -78,4 +78,4 @@ systemctl enable tuned
 echo "Enabling powertop..."
 systemctl enable powertop
 systemctl enable sshd
-systemctl enable cockpit
+systemctl enable cockpit.socket
