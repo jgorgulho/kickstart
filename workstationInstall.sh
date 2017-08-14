@@ -22,11 +22,10 @@ echo 'Updating system...'
 sudo dnf update -y
 
 echo 'Installing big list of packages...'
-sudo dnf group install -y "C Development Tools and Libraries"
 sudo dnf install -y abrt-desktop autoconf automake binutils bison chromium \
 chrony cmake cockpit cockpit-bridge cockpit-docker cockpit-kubernetes \
 cockpit-networkmanager cockpit-pcp cockpit-shell cockpit-storaged cockpit-ws \
-cockpit-selinux cockpit-dock cockpit-dashboard cockpit-machines \
+cockpit-selinux cockpit-dashboard cockpit-machines \
 cockpit-packagekit cockpit-sosreport cockpit-system \
 cowsay cups cups-filters dejavu-sans-mono-fonts deltarpm \
 diffstat docker docker-registry docker-vim doxygen \
