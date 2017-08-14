@@ -32,7 +32,7 @@ guestfs-browser hpijs hplip icedtea-web inkscape java-openjdk \
 levien-inconsolata-fonts libffi libguestfs-tools libtool \
 libvirt-daemon-config-network libvirt-daemon-kvm libxml2-devel lynx \
 make mozilla-fira-mono-fonts nmap nodejs npm nss-mdns ntfs-3g \
-openssh-server PackageKit patch patchutils perl-core pkgconfig \
+openssh-server PackageKit patch patchutils perl-core \
 powerline powertop python-libguestfs python-pip qemu-kvm recordmydesktop \
 redhat-rpm-config rolekit ruby-devel rubygems-devel setroubleshoot skanlite \
 strace subversion system-config-keyboard \
@@ -59,9 +59,6 @@ gnome-shell-extension-tool -e user-theme
 gnome-shell-extension-tool -e window-list 
 sudo dnf copr enable -y region51/chrome-gnome-shell
 sudo dnf install -y chrome-gnome-shell
-
-echo "[Settings]\ngtk-aplication-prefer-dark-theme=1" \
-    > ~/.configs/gtk-3.0/settings.ini
 
 echo "Cloning dotfiles from github repo to root..."
 git clone https://github.com/jgorgulho/dotfiles /root/.dotfiles
