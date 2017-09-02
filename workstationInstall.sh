@@ -4,8 +4,11 @@ echo "###############################################"
 echo "# Running Installation Script for Workstation #"
 echo "###############################################"
 
-echo 'Setting delta rpm...'
+echo 'Setting dnf configs...'
 echo "deltarpm=1" | sudo tee -a /etc/dnf/dnf.conf
+echo "fastestmirror=true" | sudo tee -a /etc/dnf/dnf.conf
+echo "minrate=10k" | sudo tee -a /etc/dnf/dnf.conf
+echo "timeout=10" | sudo tee -a /etc/dnf/dnf.conf
 
 echo 'Updating system...'
 sudo dnf update -y
