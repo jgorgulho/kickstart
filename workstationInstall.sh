@@ -14,6 +14,8 @@ echo 'Updating system...'
 sudo dnf update -y
 
 echo 'Setting repositories...'
+echo 'Setting Negativo17 Spotify repositories...'
+dnf config-manager --add-repo=http://negativo17.org/repos/fedora-spotify.repo
 
 echo 'Installing rpmfusion...'
 sudo dnf install -y "https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm"
@@ -41,7 +43,7 @@ make mozilla-fira-mono-fonts nmap nodejs node-sass npm nss-mdns ntfs-3g \
 openssh-server PackageKit patch patchutils perl-core \
 powerline powertop python-libguestfs python-pip qemu-kvm recordmydesktop \
 redhat-rpm-config rolekit ruby-devel rubygems-devel setroubleshoot skanlite \
-strace subversion system-config-keyboard \
+spotify-client strace subversion system-config-keyboard \
 system-config-language system-config-users systemtap tmux \
 tuned unzip vim vim-common vim-enhanced vim-filesystem \
 *powerline* vim-X11 virt-install virt-manager virt-top virt-viewer \
