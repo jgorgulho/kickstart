@@ -39,7 +39,7 @@ gdb gettext ghostscript gimp git glibc-devel google-droid-sans-mono-fonts \
 guestfs-browser hpijs hplip icedtea-web inkscape java-openjdk \
 levien-inconsolata-fonts libffi libguestfs-tools libtool \
 libvirt-daemon-config-network libvirt-daemon-kvm libxml2-devel lynx \
-make mozilla-fira-mono-fonts nmap nodejs node-sass npm nss-mdns ntfs-3g \
+make mozilla-fira-mono-fonts nmap nodejs npm nss-mdns ntfs-3g \
 openssh-server PackageKit patch patchutils perl-core \
 powerline powertop python-libguestfs python-pip qemu-kvm recordmydesktop \
 redhat-rpm-config rolekit ruby-devel rubygems-devel setroubleshoot skanlite \
