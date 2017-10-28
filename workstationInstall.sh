@@ -33,7 +33,7 @@ cockpit-networkmanager cockpit-pcp cockpit-shell cockpit-storaged cockpit-ws \
 cockpit-selinux cockpit-dashboard cockpit-machines \
 cockpit-packagekit cockpit-sosreport cockpit-system \
 cowsay cups cups-filters dejavu-sans-mono-fonts deltarpm \
-diffstat docker docker-registry docker-vim doxygen \
+diffstat docker docker-compose docker-registry docker-vim doxygen \
 fedora-dockerfiles firefox flex fortune-mod gcc gcc-c++ \
 gdb gettext ghostscript gimp git glibc-devel google-droid-sans-mono-fonts \
 guestfs-browser hpijs hplip icedtea-web inkscape java-openjdk \
