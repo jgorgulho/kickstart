@@ -74,6 +74,8 @@ sudo dnf update -y
 
 
 ## Begin installing individual packages 
+echo 'Configuring repo for paper icons and theme...'
+dnf config-manager --add-repo https://download.opensuse.org/repositories/home:snwh:paper/Fedora_25/home:snwh:paper.repo
        
 # Begin installing rpm fusion 
 echo 'Installing rpmfusion...'
