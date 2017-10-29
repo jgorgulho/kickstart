@@ -1,64 +1,107 @@
 #!/bin/env bash
 
+## Variables
+dnfConfigFile=/etc/dnf/dnf.conf
+user=jgorgulho
+
+## Functions
+
+# Function to define config for dnf
+# Inputs:
+# $1 configFile
+# $2 nameOfConfigToSet
+# $3 configToSet
+# Returns:
+# n/a
+function defineDnfConfig() {
+  ## Begin dnf config check
+  cleanFile $1
+  echo 'Removing previous configs...'
+  if (( $(grep -o $2 $1 | wc -l) >= 1)); then
+      grep -v $2 $1 >> temp
+      mv temp $1
+  fi
+  ## End dnf config check
+  ## Begin dnf config set
+  echo 'Setting current desired config...'
+  echo $3 | sudo tee -a $1
+  cleanFile $1
+  echo 'Set '$3' .'
+  ## end dnf config check
+}
+
+# Function to clean file $1 of empty lines
+function cleanFile() {
+    sed -i '/^$/d' $1
+}
+
 echo "##########################################"
 echo "# Running Installation Script for Server #"
 echo "##########################################"
 
-echo 'Setting delta rpm...'
-echo "deltarpm=1" | sudo tee -a /etc/dnf/dnf.conf
+
+### DNF configs
+echo 'Setting dnf configs...'
+## Begin delta RPM 
+configName="deltarpm"
+configSetting="deltarpm=1"
+defineDnfConfig $dnfConfigFile $configName $configSetting
+## End delta RPM 
+
+## Begin fastest mirror
+configName="fastestmirror"
+configSetting="fastestmirror=false"
+defineDnfConfig $dnfConfigFile $configName $configSetting
+## End fastest mirror
+
+## Begin min rate
+configName="minrate"
+configSetting="minrate=10k"
+defineDnfConfig $dnfConfigFile $configName $configSetting
+## End min rate
+
+## Begin timeout
+configName="timeout"
+configSetting="timeout=10"
+defineDnfConfig $dnfConfigFile $configName $configSetting
+## End timeout
+
+### End DNF configs
 
 echo 'Updating system...'
 sudo dnf update -y
 
-echo 'Setting repositories...'
 
+## Begin installing individual packages 
+       
+# Begin installing rpm fusion 
 echo 'Installing rpmfusion...'
 sudo dnf install -y "https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm"
 sudo dnf install -y "https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm"
-echo 'Installing GitHub Atom editor...'
-sudo dnf install -y "https://github.com/atom/atom/releases/download/v1.11.1/atom.x86_64.rpm"
+# End installing rpm fusion 
+
+## End installing individual packages 
+
 
 echo 'Updating system...'
 sudo dnf update -y
 
-sudo dnf install -y abrt-desktop autoconf automake binutils bison chromium \
-chrony cmake cockpit cockpit-bridge cockpit-docker cockpit-kubernetes \
-cockpit-networkmanager cockpit-pcp cockpit-shell cockpit-storaged cockpit-ws \
-cockpit-selinux cockpit-dock cockpit-dashboard cockpit-machines \
-cockpit-packagekit cockpit-sosreport cockpit-system \
-cowsay cups cups-filters dejavu-sans-mono-fonts deltarpm diffstat docker \
-docker-registry docker-vim doxygen fedora-dockerfiles flex \
-fortune-mod gcc gcc-c++ gdb gettext ghostscript git glibc-devel \
-google-droid-sans-mono-fonts guestfs-browser hpijs hplip \
-levien-inconsolata-fonts libdvdcss libffi libguestfs-tools libtool \
-libvirt-daemon-config-network libvirt-daemon-kvm libxml2-devel lynx make \
-mozilla-fira-mono-fonts nmap nodejs npm nss-mdns ntfs-3g openssh-server \
-PackageKit patch patchutils perl-core pkgconfig powerline powertop \
-python-libguestfs python-pip qemu-kvm redhat-rpm-config rolekit ruby-devel \
-rubygem-byebug rubygem-coffee-rails rubygem-jbuilder rubygem-jquery-rails \
-rubygem-rails rubygem-sdoc rubygem-spring rubygem-sqlite3 rubygem-turbolinks \
-rubygem-uglifier rubygem-web-console setroubleshoot strace subversion \
-system-config-keyboard system-config-language \
-system-config-users systemtap tmux tuned unzip vim vim-common \
-vim-enhanced vim-filesystem *powerline* virt-install virt-manager \
-virt-top virt-viewer w3m youtube-dl fuse-sshfs
+echo 'Installing big list of packages...'
+sudo dnf install -y $(<packagesToInstallServer)
 
 echo "Cloning dotfiles from github repo to root..."
 git clone https://github.com/jgorgulho/dotfiles /root/.dotfiles
 ln -sf /root/.dotfiles/.bashrc /root/.bashrc
-ln -sf /root/.dotfiles/.dfm /root/.dfm
 echo "Cloning dotfiles from github repo to user..."
-git clone https://github.com/jgorgulho/dotfiles /home/jgorgulho/.dotfiles
-ln -sf /home/jgorgulho/.dotfiles/.bashrc /home/jgorgulho/.bashrc
-chown -R jgorgulho /home/jgorgulho/.dotfiles
-chown -R jgorgulho /home/jgorgulho/.dotfiles/.*
-chown -R jgorgulho /home/jgorgulho/.bashrc
-
-#echo "Installing Jekyll..."
-#gem install jekyll
+git clone https://github.com/jgorgulho/dotfiles /home/$user/.dotfiles
+ln -sf /home/$user/.dotfiles/.bashrc /home/$user/.bashrc
+chown -R $user /home/$user/.dotfiles
+chown -R $user /home/$user/.dotfiles/.*
+chown -R $user /home/$user/.bashrc
 
 echo "Enabling tuned..."
-systemctl enable tuned
+sudo systemctl enable tuned
 echo "Enabling powertop..."
-systemctl enable powertop
-
+sudo systemctl enable powertop
+sudo systemctl enable sshd
+sudo systemctl enable cockpit.socket

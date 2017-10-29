@@ -3,7 +3,6 @@ autoconf
 automake
 binutils
 bison
-chromium
 chrony
 cmake
 cockpit
@@ -33,7 +32,6 @@ docker-registry
 docker-vim
 doxygen
 fedora-dockerfiles
-firefox
 flatpak
 flex
 fortune-mod
@@ -43,15 +41,12 @@ gcc-c++
 gdb
 gettext
 ghostscript
-gimp
 git
 glibc-devel
 google-droid-sans-mono-fonts
 guestfs-browser
 hpijs
 hplip
-icedtea-web
-inkscape
 java-openjdk
 keepass
 kpcli
@@ -72,8 +67,6 @@ nss-mdns
 ntfs-3g
 openssh-server
 PackageKit
-paper-icon-theme
-paper-gtk-theme
 patch
 patchutils
 perl-core
@@ -103,10 +96,8 @@ vim
 vim-common
 vim-enhanced
 vim-filesystem
-vim-X11
 virt-install
 virt-manager
 virt-top
 virt-viewer
-vlc
 youtube-dl

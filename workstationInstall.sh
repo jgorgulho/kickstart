@@ -1,6 +1,5 @@
 #!/bin/env bash
 
-
 ## Variables
 dnfConfigFile=/etc/dnf/dnf.conf
 user=jgorgulho
