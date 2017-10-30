@@ -97,7 +97,7 @@ fi
     echo 'Installing GitHub Atom editor (stable)...'
     echo 'Installing GitHub Atom editor (developer)...'
     sudo dnf install -y atom-beta.rpm atom.rpm
-    su -c "cd && apm install atom-ide-ui ide-typescript ide-flowtype" -s /bin/sh $user
+    su -c "cd && apm install atom-ide-ui ide-typescript ide-flowtype prettier-atom prettier-eslint linter-scss-lint" -s /bin/sh $user
 # End installing atom editor 
 ## End installing individual packages 
 
