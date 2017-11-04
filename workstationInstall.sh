@@ -118,8 +118,6 @@ flatpak install -y org.mozilla.FirefoxRepo org.mozilla.FirefoxDevEdition
 echo 'Installing Flatpak Libreoffice'
 wget http://download.documentfoundation.org/libreoffice/flatpak/latest/LibreOffice.flatpak
 flatpak install -y --bundle LibreOffice.flatpak
-echo 'Installing Flatpak Gnome Games (unstable)'
-flatpak install -y --from https://git.gnome.org/browse/gnome-apps-nightly/plain/gnome-games.flatpakref
 # End install flatpak packages 
 
 # Main Gnome Shell Extensions
