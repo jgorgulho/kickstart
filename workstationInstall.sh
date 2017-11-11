@@ -155,3 +155,8 @@ echo "Enabling powertop..."
 sudo systemctl enable powertop
 sudo systemctl enable sshd
 sudo systemctl enable cockpit.socket
+
+# Finished running script
+echo "Finished running script."
+echo "If on Gnome shell install gnome extentions from list."
+echo "Go to https://flathub.org/ and install Spotify."
