@@ -50,7 +50,7 @@ defineDnfConfig $dnfConfigFile $configName $configSetting
 
 ## Begin fastest mirror
 configName="fastestmirror"
-configSetting="fastestmirror=false"
+configSetting="fastestmirror=true"
 defineDnfConfig $dnfConfigFile $configName $configSetting
 ## End fastest mirror
 
